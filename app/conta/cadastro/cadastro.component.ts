@@ -55,8 +55,8 @@ export class CadastroComponent extends FormBaseComponent implements OnInit, Afte
 
     this.cadastroForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: senha,
-      confirmPassword: senhaConfirm
+      senha: senha,
+      senhaConfirmacao: senhaConfirm
     });
   }
 
@@ -87,7 +87,7 @@ export class CadastroComponent extends FormBaseComponent implements OnInit, Afte
     let toast = this.toastr.success('Registro realizado com Sucesso!', 'Bem vindo!!!');
     if (toast) {
       toast.onHidden.subscribe(() => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/cadastro']);
       });
     }
   }

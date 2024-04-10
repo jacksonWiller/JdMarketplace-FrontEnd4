@@ -34,7 +34,7 @@ export class ProdutoService extends BaseService {
 
     atualizarProduto(produto: Produto): Observable<Produto> {
         return this.http
-            .put(this.UrlServiceV1 + "produtos/" + produto.id, produto, super.ObterAuthHeaderJson())
+            .put(this.UrlServiceV1 + "produto/" + produto.id, produto, super.ObterAuthHeaderJson())
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));
