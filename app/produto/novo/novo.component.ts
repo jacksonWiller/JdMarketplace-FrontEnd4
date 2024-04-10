@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChildren, ElementRef } from '@angular/core';
-import { FormBuilder, Validators, FormControlName } from '@angular/forms';
+import { FormBuilder, Validators, FormControlName, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Observable, fromEvent, merge } from 'rxjs';
@@ -20,6 +20,8 @@ export class NovoComponent extends ProdutoBaseComponent implements OnInit {
 
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
 
+  pForm: FormGroup;
+
   imageChangedEvent: any = '';
   croppedImage: any = '';
   canvasRotation = 0;
@@ -37,28 +39,21 @@ export class NovoComponent extends ProdutoBaseComponent implements OnInit {
     private toastr: ToastrService) { super(); }
 
   ngOnInit(): void {
-
-    this.produtoService.obterFornecedores()
-      .subscribe(
-        fornecedores => this.fornecedores = fornecedores);
-
-    this.produtoForm = this.fb.group({
-      fornecedorId: ['', [Validators.required]],
+    this.pForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
       descricao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(1000)]],
-      imagem: ['', [Validators.required]],
       valor: ['', [Validators.required]],
       ativo: [true]
     });
   }
 
-  ngAfterViewInit(): void {
-    super.configurarValidacaoFormulario(this.formInputElements);
-  }
+  // ngAfterViewInit(): void {
+  //   super.configurarValidacaoFormulario(this.formInputElements);
+  // }
 
   adicionarProduto() {
-    if (this.produtoForm.dirty && this.produtoForm.valid) {
-      this.produto = Object.assign({}, this.produto, this.produtoForm.value);
+    if (this.pForm.dirty && this.pForm.valid) {
+      this.produto = Object.assign({}, this.produto, this.pForm.value);
 
       this.produto.imagemUpload = this.croppedImage.split(',')[1];
       this.produto.imagem = this.imagemNome;
@@ -75,7 +70,7 @@ export class NovoComponent extends ProdutoBaseComponent implements OnInit {
   }
 
   processarSucesso(response: any) {
-    this.produtoForm.reset();
+    this.pForm.reset();
     this.errors = [];
 
     let toast = this.toastr.success('Produto cadastrado com sucesso!', 'Sucesso!');

@@ -21,5 +21,8 @@ export class ListaComponent implements OnInit {
       .subscribe(
         produtos => this.produtos = produtos,
         error => this.errorMessage);
+
+   console.log(this.produtoService.obterTodos());  
   }
+  
 }

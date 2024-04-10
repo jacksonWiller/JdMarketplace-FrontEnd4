@@ -16,9 +16,6 @@ const produtoRouterConfig: Routes = [
             { path: 'listar-todos', component: ListaComponent },
             {
                 path: 'adicionar-novo', component: NovoComponent,
-                canDeactivate: [ProdutoGuard],
-                canActivate: [ProdutoGuard],
-                data: [{ claim: { nome: 'Produto', valor: 'Adicionar' } }],
             },
             {
                 path: 'editar/:id', component: EditarComponent,
@@ -36,12 +33,18 @@ const produtoRouterConfig: Routes = [
             },
             {
                 path: 'excluir/:id', component: ExcluirComponent,
-                canActivate: [ProdutoGuard],
-                data: [{ claim: { nome: 'Produto', valor: 'Excluir' } }],
                 resolve: {
                     produto: ProdutoResolve
                 }
             },
+            // {
+            //     path: 'excluir/:id', component: ExcluirComponent,
+            //     canActivate: [ProdutoGuard],
+            //     data: [{ claim: { nome: 'Produto', valor: 'Excluir' } }],
+            //     resolve: {
+            //         produto: ProdutoResolve
+            //     }
+            // },
         ]
     }
 ];

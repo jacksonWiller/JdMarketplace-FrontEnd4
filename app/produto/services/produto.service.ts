@@ -20,13 +20,13 @@ export class ProdutoService extends BaseService {
 
     obterPorId(id: string): Observable<Produto> {
         return this.http
-            .get<Produto>(this.UrlServiceV1 + "produtos/" + id, super.ObterAuthHeaderJson())
+            .get<Produto>(this.UrlServiceV1 + "produto/" + id)
             .pipe(catchError(super.serviceError));
     }
 
     novoProduto(produto: Produto): Observable<Produto> {
         return this.http
-            .post(this.UrlServiceV1 + "produtos", produto, super.ObterAuthHeaderJson())
+            .post(this.UrlServiceV1 + "produto", produto)
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));
@@ -42,7 +42,7 @@ export class ProdutoService extends BaseService {
 
     excluirProduto(id: string): Observable<Produto> {
         return this.http
-            .delete(this.UrlServiceV1 + "produtos/" + id, super.ObterAuthHeaderJson())
+            .delete(this.UrlServiceV1 + "produto/" + id,)
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));

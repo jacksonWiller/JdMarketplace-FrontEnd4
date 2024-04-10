@@ -10,9 +10,9 @@ export class ProdutoGuard extends BaseGuard implements CanActivate, CanDeactivat
     constructor(protected override router: Router){ super(router); }
 
     canDeactivate(component: NovoComponent) {
-        if(component.mudancasNaoSalvas) {
-            return window.confirm('Tem certeza que deseja abandonar o preenchimento do formulario?');
-        }        
+        // if(component.mudancasNaoSalvas) {
+        //     return window.confirm('Tem certeza que deseja abandonar o preenchimento do formulario?');
+        // }        
         return true
     }
 
